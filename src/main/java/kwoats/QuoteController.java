@@ -1,7 +1,5 @@
 package kwoats;
 
-import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,15 +15,18 @@ public class QuoteController {
 	@Autowired
 	private QuoteService quoteService;
 
+	@Autowired
+	private SessionState sessionState;
+
 	@GetMapping
-	public String get(HttpSession session, Model model) {
-		Integer previousRandomIndex = (Integer) session.getAttribute("previousRandomIndex");
+	public String get(Model model) {
+		Integer previousRandomIndex = sessionState.getPreviousRandomIndex();
 
 		int numberOfQuotes = quoteService.numberOfQuotes();
 		int randomIndex = randomNumberService.pickRandomNumber(numberOfQuotes, previousRandomIndex);
 		String randomQuote = quoteService.getQuoteAt(randomIndex);
 
-		session.setAttribute("previousRandomIndex", randomIndex);
+		sessionState.setPreviousRandomIndex(randomIndex);
 
 		// fill the model
 		model.addAttribute("randomQuote", randomQuote);
