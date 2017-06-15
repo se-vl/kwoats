@@ -5,6 +5,9 @@ import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
+@Service
 public class QuoteService {
 	private static final String[] wordsOfWisdom = {
 			"Multicore processors are just now [May 2006] becoming inexpensive enough for midrange desktop systems. Not coincidentally, many development teams are noticing more and more threading-related bug reports in their projects.",

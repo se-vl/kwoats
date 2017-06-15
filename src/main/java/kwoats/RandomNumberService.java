@@ -2,6 +2,9 @@ package kwoats;
 
 import java.util.Random;
 
+import org.springframework.stereotype.Service;
+
+@Service
 public class RandomNumberService {
 	private Random randomNumberGenerator = new Random();
 
