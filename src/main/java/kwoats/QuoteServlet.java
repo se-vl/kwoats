@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Random;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -29,24 +28,18 @@ public class QuoteServlet extends HttpServlet {
 
 	private List<String> allQuotes = new ArrayList<>(Arrays.asList(wordsOfWisdom));
 
-	private Random randomNumberGenerator = new Random();
+	private RandomNumberService randomNumberService = new RandomNumberService();
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		int numberOfQuotes = allQuotes.size();
-		int randomIndex;
 		HttpSession session = request.getSession();
 		Integer previousRandomIndex = (Integer) session.getAttribute("previousRandomIndex");
-		if (previousRandomIndex == null) {
-			randomIndex = randomNumberGenerator.nextInt(numberOfQuotes);
-		} else {
-			randomIndex = randomNumberGenerator.nextInt(numberOfQuotes - 1);
-			if (randomIndex == previousRandomIndex) {
-				randomIndex = numberOfQuotes - 1;
-			}
-		}
-		session.setAttribute("previousRandomIndex", randomIndex);
+
+		int numberOfQuotes = allQuotes.size();
+		int randomIndex = randomNumberService.pickRandomNumber(numberOfQuotes, previousRandomIndex);
 		String randomQuote = allQuotes.get(randomIndex);
+
+		session.setAttribute("previousRandomIndex", randomIndex);
 
 		// fill the model
 		request.setAttribute("randomQuote", randomQuote);
