@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 @Controller
 public class QuoteController {
 	@Autowired
-	private RandomNumberService randomNumberService;
+	private RandomNumberClient randomNumberClient;
 
 	@Autowired
 	private QuoteService quoteService;
@@ -23,7 +23,7 @@ public class QuoteController {
 		Integer previousRandomIndex = sessionState.getPreviousRandomIndex();
 
 		int numberOfQuotes = quoteService.numberOfQuotes();
-		int randomIndex = randomNumberService.pickRandomNumber(numberOfQuotes, previousRandomIndex);
+		int randomIndex = randomNumberClient.pickRandomNumber(numberOfQuotes, previousRandomIndex);
 		String randomQuote = quoteService.getQuoteAt(randomIndex);
 
 		sessionState.setPreviousRandomIndex(randomIndex);
