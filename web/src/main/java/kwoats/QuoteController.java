@@ -13,7 +13,7 @@ public class QuoteController {
 	private RandomNumberClient randomNumberClient;
 
 	@Autowired
-	private QuoteService quoteService;
+	private QuoteClient quoteClient;
 
 	@Autowired
 	private SessionState sessionState;
@@ -22,9 +22,9 @@ public class QuoteController {
 	public String get(Model model) {
 		Integer previousRandomIndex = sessionState.getPreviousRandomIndex();
 
-		int numberOfQuotes = quoteService.numberOfQuotes();
+		int numberOfQuotes = quoteClient.numberOfQuotes();
 		int randomIndex = randomNumberClient.pickRandomNumber(numberOfQuotes, previousRandomIndex);
-		String randomQuote = quoteService.getQuoteAt(randomIndex);
+		String randomQuote = quoteClient.getQuoteAt(randomIndex);
 
 		sessionState.setPreviousRandomIndex(randomIndex);
 
@@ -39,10 +39,10 @@ public class QuoteController {
 
 	@PostMapping
 	public String post(@RequestParam("newQuote") String newQuote, Model model) {
-		quoteService.addNewQuote(newQuote);
+		quoteClient.addNewQuote(newQuote);
 
 		// fill the model
-		model.addAttribute("allQuotes", quoteService.viewAllQuotes());
+		model.addAttribute("allQuotes", quoteClient.viewAllQuotes());
 
 		// forward to the view
 		return "AllQuotes";
