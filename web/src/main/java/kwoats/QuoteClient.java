@@ -2,6 +2,7 @@ package kwoats;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Component;
@@ -9,7 +10,8 @@ import org.springframework.web.client.RestTemplate;
 
 @Component
 public class QuoteClient {
-	private static final String URL = "http://localhost:8080/kwoats-quotes";
+	@Value("${kwoats.quotes.url}")
+	private String URL;
 
 	private RestTemplate restTemplate = new RestTemplate();
 
