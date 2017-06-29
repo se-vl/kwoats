@@ -2,6 +2,8 @@ package kwoats;
 
 import java.util.List;
 
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
@@ -24,6 +26,8 @@ public class QuoteClient {
 	}
 
 	public List<String> viewAllQuotes() {
-		return restTemplate.getForObject(URL + "/quotes", List.class);
+		ParameterizedTypeReference<List<String>> listOfString = new ParameterizedTypeReference<List<String>>() {
+		};
+		return restTemplate.exchange(URL + "/quotes", HttpMethod.GET, null, listOfString).getBody();
 	}
 }
