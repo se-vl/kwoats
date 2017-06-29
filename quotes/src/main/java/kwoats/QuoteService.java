@@ -1,9 +1,9 @@
 package kwoats;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
 
@@ -18,21 +18,22 @@ public class QuoteService {
 			"Whenever more than one thread accesses a given state variable, and one of them might write to it, they all must coordinate their access to it using synchronization. You should avoid the temptation to think that there are 'special' situations in which this rule does not apply.",
 			"A program that omits needed synchronization might appear to work, passing its tests and performing well for years, but it is still broken and may fail at any moment.", };
 
-	private List<String> allQuotes = new ArrayList<>(Arrays.asList(wordsOfWisdom));
+	private List<Quote> allQuotes = Arrays.stream(wordsOfWisdom).map(text -> new Quote(text, "Brian Goetz", 2006))
+			.collect(Collectors.toList());
 
 	public int numberOfQuotes() {
 		return allQuotes.size();
 	}
 
-	public String getQuoteAt(int randomIndex) {
+	public Quote getQuoteAt(int randomIndex) {
 		return allQuotes.get(randomIndex);
 	}
 
-	public void addNewQuote(String newQuote) {
+	public void addNewQuote(Quote newQuote) {
 		allQuotes.add(newQuote);
 	}
 
-	public List<String> viewAllQuotes() {
+	public List<Quote> viewAllQuotes() {
 		return Collections.unmodifiableList(allQuotes);
 	}
 }

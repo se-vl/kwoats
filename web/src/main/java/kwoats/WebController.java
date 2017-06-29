@@ -24,7 +24,7 @@ public class WebController {
 
 		int numberOfQuotes = quoteClient.numberOfQuotes();
 		int randomIndex = randomNumberClient.pickRandomNumber(numberOfQuotes, previousRandomIndex);
-		String randomQuote = quoteClient.getQuoteAt(randomIndex);
+		Quote randomQuote = quoteClient.getQuoteAt(randomIndex);
 
 		sessionState.setPreviousRandomIndex(randomIndex);
 
@@ -38,8 +38,9 @@ public class WebController {
 	}
 
 	@PostMapping
-	public String post(@RequestParam("newQuote") String newQuote, Model model) {
-		quoteClient.addNewQuote(newQuote);
+	public String post(@RequestParam("text") String text, @RequestParam("author") String author,
+			@RequestParam("year") int year, Model model) {
+		quoteClient.addNewQuote(new Quote(text, author, year));
 
 		// fill the model
 		model.addAttribute("allQuotes", quoteClient.viewAllQuotes());

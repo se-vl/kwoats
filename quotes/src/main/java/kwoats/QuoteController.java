@@ -15,7 +15,7 @@ public class QuoteController {
 	private QuoteService quoteService;
 
 	@GetMapping("/quotes")
-	public List<String> getAllQuotes() {
+	public List<Quote> getAllQuotes() {
 		return quoteService.viewAllQuotes();
 	}
 
@@ -25,12 +25,12 @@ public class QuoteController {
 	}
 
 	@GetMapping("/quotes/{index}")
-	public String getQuoteAt(@PathVariable("index") int index) {
+	public Quote getQuoteAt(@PathVariable("index") int index) {
 		return quoteService.getQuoteAt(index);
 	}
 
 	@PutMapping("/quotes/new")
-	public void put(@RequestBody String newQuote) {
+	public void put(@RequestBody Quote newQuote) {
 		quoteService.addNewQuote(newQuote);
 	}
 }

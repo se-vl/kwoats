@@ -13,7 +13,11 @@
 <h2>All quotes</h2>
 <ol>
 	<c:forEach items="${allQuotes}" var="quote">
-		<li><c:out value="${quote}" /></li>
+		<li>
+			&quot;<i><c:out value="${quote.text}" /></i>&quot;<br />
+			<b><c:out value="${quote.author}" /></b>,
+			${quote.year}
+		</li>
 	</c:forEach>
 </ol>
 

@@ -17,17 +17,17 @@ public class QuoteClient {
 		return restTemplate.getForObject(URL + "/quotes/number", Integer.class);
 	}
 
-	public String getQuoteAt(int randomIndex) {
-		return restTemplate.getForObject(URL + "/quotes/{index}", String.class, randomIndex);
+	public Quote getQuoteAt(int randomIndex) {
+		return restTemplate.getForObject(URL + "/quotes/{index}", Quote.class, randomIndex);
 	}
 
-	public void addNewQuote(String newQuote) {
+	public void addNewQuote(Quote newQuote) {
 		restTemplate.put(URL + "/quotes/new", newQuote);
 	}
 
-	public List<String> viewAllQuotes() {
-		ParameterizedTypeReference<List<String>> listOfString = new ParameterizedTypeReference<List<String>>() {
+	public List<Quote> viewAllQuotes() {
+		ParameterizedTypeReference<List<Quote>> listOfQuote = new ParameterizedTypeReference<List<Quote>>() {
 		};
-		return restTemplate.exchange(URL + "/quotes", HttpMethod.GET, null, listOfString).getBody();
+		return restTemplate.exchange(URL + "/quotes", HttpMethod.GET, null, listOfQuote).getBody();
 	}
 }

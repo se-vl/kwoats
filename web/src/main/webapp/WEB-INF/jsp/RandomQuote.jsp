@@ -12,14 +12,32 @@
 
 <h2>Random quote</h2>
 <p>
-&quot;<c:out value="${randomQuote}" />&quot;
+&quot;<i><c:out value="${randomQuote.text}" /></i>&quot;<br />
+<b><c:out value="${randomQuote.author}" /></b>,
+${randomQuote.year}
 (${randomIndex + 1} / ${numberOfQuotes})
 </p>
 
 <h2>Add quote</h2>
 <form method='post'>
-<input type='text' name='newQuote' size='100' />
-<input type='submit' />
+	<table>
+		<tr>
+			<td>Text:</td>
+			<td><input type='text' name='text' size='100' /></td>
+		</tr>
+		<tr>
+			<td>Author:</td>
+			<td><input type='text' name='author' size='25' /></td>
+		</tr>
+		<tr>
+			<td>Year:</td>
+			<td><input type='number' name='year' size='10' /></td>
+		</tr>
+		<tr>
+			<td></td>
+			<td><input type='submit' /></td>
+		</tr>
+	</table>
 </form>
 
 </body>
