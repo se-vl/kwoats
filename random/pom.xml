@@ -27,7 +27,7 @@
 				<artifactId>docker-maven-plugin</artifactId>
 				<version>0.4.10</version>
 				<configuration>
-					<imageName>kwoats/random</imageName>
+					<imageName>${project.artifactId}</imageName>
 					<dockerDirectory>${project.basedir}</dockerDirectory>
 				</configuration>
 			</plugin>
