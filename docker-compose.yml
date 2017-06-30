@@ -1,0 +1,13 @@
+version: '2'
+services:
+  random:
+    image: kwoats-random
+  quotes:
+    image: kwoats-quotes
+  web:
+    image: kwoats-web
+    ports:
+     - "8080:8080"
+    environment:
+     - KWOATS_RANDOM_URL=http://random:8080/kwoats-random
+     - KWOATS_QUOTES_URL=http://quotes:8080/kwoats-quotes
