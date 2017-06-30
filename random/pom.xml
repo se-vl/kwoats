@@ -30,6 +30,15 @@
 					<imageName>${project.artifactId}</imageName>
 					<dockerDirectory>${project.basedir}</dockerDirectory>
 				</configuration>
+				<executions>
+					<execution>
+						<id>build-image</id>
+						<phase>pre-integration-test</phase>
+						<goals>
+							<goal>build</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>
