@@ -8,6 +8,10 @@ services:
     image: kwoats-web
     ports:
      - "8080:8080"
+     - "8000:8000"
     environment:
      - KWOATS_RANDOM_URL=http://random:8080/kwoats-random
      - KWOATS_QUOTES_URL=http://quotes:8080/kwoats-quotes
+     - JPDA_ADDRESS=8000
+     - JPDA_TRANSPORT=dt_socket
+    command: /usr/local/tomcat/bin/catalina.sh jpda run
